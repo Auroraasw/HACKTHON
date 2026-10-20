@@ -1,0 +1,246 @@
+/* ==========================================================================
+   Tema Limpo, Profissional e Moderno (CSS Padrão)
+   ========================================================================== */
+:root {
+    --primary-color: #1a73e8;       /* Azul padrão moderno */
+    --primary-hover: #1557b0;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-color: #202124;
+    --text-muted: #5f6368;
+    --border-color: #dadce0;
+
+    --success-bg: #e6f4ea;
+    --success-text: #137333;
+    --error-bg: #fce8e6;
+    --error-text: #c5221f;
+
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(60, 64, 67, 0.12), 0 1px 2px rgba(60, 64, 67, 0.24);
+    --shadow-hover: 0 4px 8px rgba(60, 64, 67, 0.15), 0 1px 3px rgba(60, 64, 67, 0.3);
+    --transition: all 0.2s ease-in-out;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   Cabeçalho
+   ========================================================================== */
+header {
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+}
+
+header .brand {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+}
+
+header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+header p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+   Estrutura (.wrap)
+   ========================================================================== */
+.wrap {
+    max-width: 1000px;
+    width: 90%;
+    margin: 2rem auto;
+    flex: 1;
+}
+
+.intro {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.intro h2 {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 0.2rem;
+}
+
+.intro p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   Alertas
+   ========================================================================== */
+.alert {
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+.alert-tag {
+    font-weight: 700;
+    margin-right: 0.5rem;
+}
+
+.alert.success {
+    background-color: var(--success-bg);
+    color: var(--success-text);
+    border: 1px solid #ceead6;
+}
+
+.alert.error {
+    background-color: var(--error-bg);
+    color: var(--error-text);
+    border: 1px solid #fad2cf;
+}
+
+/* ==========================================================================
+   Grid das Trilhas
+   ========================================================================== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.trilha {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.trilha:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: #bdc1c6;
+}
+
+.trilha .number {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+
+.trilha h3 {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    padding-right: 1.5rem;
+}
+
+.trilha p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    flex: 1;
+    margin-bottom: 1.25rem;
+}
+
+/* Botão Padrão */
+.trilha form {
+    margin-top: auto;
+}
+
+.btn {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn:active {
+    transform: scale(0.99);
+}
+
+/* ==========================================================================
+   Toolbar e Footer
+   ========================================================================== */
+.toolbar {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.toolbar span {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.toolbar .link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.toolbar .link:hover {
+    text-decoration: underline;
+}
+
+footer {
+    text-align: center;
+    padding: 1.25rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    margin-top: auto;
+}
