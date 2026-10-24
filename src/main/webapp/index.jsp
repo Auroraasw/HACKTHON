@@ -4,89 +4,151 @@
 <%@ page import="com.model.Trilha" %>
 <%@ page import="java.util.List" %>
 <%
+    /*
+     * Configura codificação, lê o arquivo de trilhas e inicializa o serviço.
+     */
     request.setCharacterEncoding("UTF-8");
-    String caminho = application.getRealPath("/recursos/trilhas.txt");
-    TrilhaRepository repositorio = new TrilhaRepository(caminho);
-    TrilhaService service = new TrilhaService(repositorio);
+    String path = application.getRealPath("/recursos/trilhas.txt");
+    TrilhaRepository repository = new TrilhaRepository(path);
+    TrilhaService service = new TrilhaService(repository);
 
-    String mensagem = null;
-    String tipoMensagem = "success";
+    String message = null;
+    String messageType = "success";
 
+    // Processa a submissão do formulário quando o usuário envia um voto (método POST)
     if ("POST".equalsIgnoreCase(request.getMethod())) {
-        String votoStr = request.getParameter("voto");
+        String voteStr = request.getParameter("voto");
         try {
-            int indice = Integer.parseInt(votoStr == null ? "" : votoStr);
-            if (service.RegVoto(indice)) {
-                mensagem = "Voto computado com sucesso! Obrigado por participar.";
-                tipoMensagem = "success";
+            int index = Integer.parseInt(voteStr == null ? "" : voteStr);
+            if (service.RegVoto(index)) {
+                message = "Voto computado com sucesso! Obrigado por participar.";
+                messageType = "success";
             } else {
-                mensagem = "A opção selecionada não existe. Escolha uma das trilhas disponíveis.";
-                tipoMensagem = "error";
+                message = "A opção selecionada não existe. Escolha uma das trilhas disponíveis.";
+                messageType = "error";
             }
         } catch (NumberFormatException e) {
-            mensagem = "Não foi possível validar seu voto. Selecione uma trilha válida.";
-            tipoMensagem = "error";
+            message = "Não foi possível validar seu voto. Selecione uma trilha válida.";
+            messageType = "error";
         }
     }
 
-    // Carrega a lista original para encontrar os índices reais
-    List<Trilha> trilhasOriginais = service.getTrilhas();
-    // Carrega a lista ordenada para exibição na tela
-    List<Trilha> trilhas = service.TrilhaOrd();
+    // Carrega a lista atualizada de trilhas para renderizar na tela
+    List<Trilha> tracks = service.getTrilhas();
 %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Termômetro de Tecnologias | Mundo SENAI</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votação Oficial | Mundo SENAI</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/style2.css">
 </head>
 <body>
-<header>
-    <div class="brand">SENAI · MUNDO SENAI</div>
-    <h1>Qual é a sua trilha?</h1>
-    <p>Seu próximo passo na tecnologia começa com uma escolha.</p>
+
+<header class="header-container">
+    <div>
+        <h1 class="brand-title">Mundo SENAI</h1>
+        <p class="brand-subtitle">Escolha a sua trilha tecnológica favorita</p>
+    </div>
+    <a href="resultado.jsp" class="results-link">Ver Resultados</a>
 </header>
-<main class="wrap">
-    <section class="intro">
-        <h2>Vote na área que mais combina com você</h2>
-        <p>Explore as possibilidades e escolha sua tecnologia favorita. Cada voto ajuda a montar o termômetro da feira.</p>
+
+<main class="main-content">
+
+    <%-- Exibe a caixa de alerta de sucesso ou erro, caso haja alguma mensagem setada no Java --%>
+    <% if (message != null) { %>
+    <div class="alert-box <%= "error".equals(messageType) ? "alert-error" : "alert-success" %>">
+        <%= message %>
+    </div>
+    <% } %>
+
+    <section class="hero-section">
+        <div class="hero-card">
+            <h2 class="hero-title">Vote na sua opção favorita</h2>
+            <p class="hero-description">Selecione uma trilha abaixo e clique no botão para confirmar seu voto.</p>
+        </div>
     </section>
 
-    <% if (mensagem != null) { %>
-        <div class="alert <%= tipoMensagem %>" role="alert">
-            <span class="alert-tag"><%= "error".equals(tipoMensagem) ? "Atenção: " : "Tudo certo! " %></span>
-            <%= mensagem %>
-        </div>
-    <% } %>
+    <%-- Monta o formulário dinâmico caso existam trilhas cadastradas --%>
+    <% if (tracks != null && !tracks.isEmpty()) { %>
+    <form id="vote-form" method="post" action="index.jsp">
+        <%-- Campo oculto que armazena o índice da trilha selecionada pelo JavaScript --%>
+        <input type="hidden" name="voto" id="selected-vote-input" value="0">
 
-    <% if (trilhas != null && !trilhas.isEmpty()) { %>
-        <div class="grid">
-            <% for (int i = 0; i < trilhas.size(); i++) {
-                Trilha trilha = trilhas.get(i);
-                int indiceOriginal = trilhasOriginais.indexOf(trilha);
+        <div class="tracks-grid">
+            <%-- Percorre a lista de trilhas criando um card interativo para cada uma --%>
+            <% for (int i = 0; i < tracks.size(); i++) {
+                Trilha track = tracks.get(i);
+                boolean isSelected = (i == 0);
             %>
-                <article class="trilha">
-                    <div class="number">#<%= (i + 1) %></div>
-                    <h3><%= trilha.getNome() %></h3>
-                    <p><%= trilha.getDescricao() %></p>
-                    <form method="post" action="index.jsp">
-                        <!-- Envia o índice real em vez da posição na tela -->
-                        <input type="hidden" name="voto" value="<%= indiceOriginal %>">
-                        <button type="submit" class="btn">Votar nesta trilha</button>
-                    </form>
-                </article>
+            <div class="track-card <%= isSelected ? "active" : "" %>" data-index="<%= i %>"
+                 data-name="<%= track.getNome() %>">
+                <div class="card-top">
+                    <span class="track-badge">#<%= String.format("%02d", i + 1) %></span>
+                    <div class="radio-indicator">
+                        <span class="radio-dot"></span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="track-name"><%= track.getNome() %>
+                    </h3>
+                    <p class="track-desc"><%= track.getDescricao() %>
+                    </p>
+                </div>
+            </div>
             <% } %>
         </div>
+
+        <div class="action-area">
+            <div class="selection-info">
+                Opção selecionada:
+                <span id="selected-label" class="selection-label">
+                        <%= tracks.get(0).getNome() %>
+                    </span>
+            </div>
+            <button type="submit" class="btn-submit">Confirmar Voto</button>
+        </div>
+    </form>
     <% } else { %>
-        <div class="alert error" role="alert">Nenhuma trilha foi cadastrada no arquivo trilhas.txt.</div>
+    <%-- Exibido caso o arquivo trilhas.txt esteja vazio ou não seja encontrado --%>
+    <div class="alert-box alert-error">
+        Nenhuma trilha foi cadastrada no arquivo trilhas.txt.
+    </div>
     <% } %>
 
-    <div class="toolbar">
-        <span>Votação aberta ao público · Mundo SENAI</span>
-    </div>
 </main>
-<footer>SENAI · Educação Profissional e Tecnológica</footer>
+
+<footer class="page-footer">
+    Sistema de Votação Oficial • Mundo SENAI
+</footer>
+
+<script>
+    /*
+
+     * Captura o clique nos cards, atualiza o destaque visual e define a trilha selecionada no input hidden.
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+        const cards = document.querySelectorAll('.track-card');
+        const voteInput = document.getElementById('selected-vote-input');
+        const selectedLabel = document.getElementById('selected-label');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Remove a seleção de todos os cards e aplica apenas no clicado
+                cards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+
+                // Atualiza o valor do input oculto e o texto na tela
+                const index = card.dataset.index;
+                const name = card.dataset.name;
+
+                voteInput.value = index;
+                selectedLabel.textContent = name;
+            });
+        });
+    });
+</script>
+
 </body>
 </html>

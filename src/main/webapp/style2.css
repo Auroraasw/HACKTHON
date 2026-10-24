@@ -1,0 +1,290 @@
+/* Reset global de estilos */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Corpo e fundo da página */
+body {
+    background-color: #f8fafc;
+    color: #0f172a;
+    padding: 24px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Cabeçalho topo (Título e link Ver Resultados) */
+.header-container {
+    width: 100%;
+    max-width: 896px;
+    margin: 0 auto 24px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 16px;
+}
+
+.brand-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.brand-subtitle {
+    font-size: 0.75rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.results-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #6366f1;
+    border: none;
+    text-decoration: none;
+    box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+    transition: background-color 0.2s ease;
+}
+
+.results-link:hover {
+    background-color: #4f46e5;
+}
+
+/* Conteúdo central da página */
+.main-content {
+    max-width: 896px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    flex-grow: 1;
+}
+
+/* Caixas de mensagens e avisos */
+.alert-box {
+    padding: 16px;
+    border-radius: 12px;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.alert-success {
+    background-color: #ecfdf5;
+    color: #047857;
+    border-color: #a7f3d0;
+}
+
+.alert-error {
+    background-color: #fef2f2;
+    color: #dc2626;
+    border-color: #fecaca;
+    text-align: center;
+}
+
+/* Caixa de instrução (Hero) */
+.hero-section {
+    text-align: center;
+}
+
+.hero-card {
+    display: inline-block;
+    border: 1px solid #e2e8f0;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 16px 32px;
+    max-width: 576px;
+    margin: 0 auto;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.hero-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #0f172a;
+    text-transform: uppercase;
+}
+
+.hero-description {
+    color: #64748b;
+    font-size: 0.75rem;
+    margin-top: 4px;
+}
+
+/* Grid responsivo de cartões */
+.tracks-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 16px;
+}
+
+@media (min-width: 640px) {
+    .tracks-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .tracks-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+/* Cartões das trilhas */
+.track-card {
+    position: relative;
+    border: 2px solid #e2e8f0;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 16px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 160px;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.track-card:hover {
+    border-color: #cbd5e1;
+}
+
+/* Estilo do cartão quando selecionado */
+.track-card.active {
+    border-color: #f59e0b;
+    background-color: #fef3c7;
+    box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.3);
+}
+
+.card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.track-badge {
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 6px;
+    background-color: #f1f5f9;
+    color: #475569;
+}
+
+.track-card.active .track-badge {
+    background-color: #fde68a;
+    color: #78350f;
+}
+
+/* Botão radio customizado */
+.radio-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 9999px;
+    border: 2px solid #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+}
+
+.track-card.active .radio-indicator {
+    border-color: #d97706;
+    background-color: #f59e0b;
+}
+
+.radio-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background-color: #ffffff;
+    display: none;
+}
+
+.track-card.active .radio-dot {
+    display: block;
+}
+
+/* Nome e descrição da trilha */
+.track-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.track-desc {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+/* Área de confirmação e botão Votar */
+.action-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+    gap: 12px;
+}
+
+.selection-info {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+.selection-label {
+    color: #6366f1;
+    background-color: #eef2ff;
+    border: 1px solid #c7d2fe;
+    padding: 4px 10px;
+    border-radius: 8px;
+    margin-left: 4px;
+    font-weight: 700;
+}
+
+.btn-submit {
+    width: 100%;
+    max-width: 448px;
+    padding: 14px 32px;
+    background-color: #6366f1;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 1rem;
+    text-transform: uppercase;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    transition: background-color 0.2s ease;
+}
+
+.btn-submit:hover {
+    background-color: #4f46e5;
+}
+
+/* Rodapé da página */
+.page-footer {
+    max-width: 896px;
+    width: 100%;
+    margin: 32px auto 0 auto;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 16px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #94a3b8;
+}

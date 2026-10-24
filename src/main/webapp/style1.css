@@ -1,0 +1,148 @@
+/* Reset de estilos globais */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Estilo do corpo da página */
+body {
+    background-color: #f8fafc;
+    color: #1e293b;
+    padding: 24px;
+    min-height: 100vh;
+}
+
+/* Container principal */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Cabeçalho e botão voltar */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    color: #0f172a;
+}
+
+.header p {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.btn-voltar {
+    background-color: #4f46e5;
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.btn-voltar:hover {
+    background-color: #4338ca;
+}
+
+/* Cartão principal e lista de itens */
+.card-resultados {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 16px 24px;
+}
+
+.trilha-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.trilha-item:last-child {
+    border-bottom: none;
+}
+
+/* Badge de posição (#1, #2) */
+.posicao {
+    background-color: #f1f5f9;
+    color: #334155;
+    font-weight: bold;
+    font-size: 0.875rem;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+/* Informações da trilha e barra de progresso */
+.info {
+    flex: 1;
+}
+
+.info h3 {
+    font-size: 1rem;
+    color: #0f172a;
+}
+
+.info p {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.barra-fundo {
+    width: 100%;
+    background-color: #f1f5f9;
+    height: 8px;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.barra-progresso {
+    background-color: #4f46e5;
+    height: 100%;
+    border-radius: 999px;
+}
+
+/* Caixa de porcentagem e total de votos */
+.votos-box {
+    text-align: right;
+    min-width: 80px;
+}
+
+.porcentagem {
+    display: block;
+    font-size: 1.125rem;
+    font-weight: 800;
+    color: #4f46e5;
+}
+
+.total-votos {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+/* Caixa de alerta de erro */
+.alerta-erro {
+    background-color: #fef2f2;
+    color: #dc2626;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #fecaca;
+    text-align: center;
+}

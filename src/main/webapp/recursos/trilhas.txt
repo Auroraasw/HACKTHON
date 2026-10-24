@@ -1,15 +1,12 @@
 Desenvolvimento Web;Criação de sites, sistemas modernos e aplicações corporativas completas.
 Inteligência Artificial;Exploração de redes neurais, machine learning e automação inteligente.
-Robótica e Automação;Projetos de hardware, sensores, Arduino e automação de processos industriais.
-Cibersegurança;Técnicas de proteção de redes, análise de vulnerabilidades e ética em hacking.
-Bola;ovos.
-Desenvolvimento Web;Criação de sites, sistemas modernos e aplicações corporativas completas.
-Inteligência Artificial;Exploração de redes neurais, machine learning e automação inteligente.
-Robótica e Automação;Projetos de hardware, sensores, Arduino e automação de processos industriais.
-Cibersegurança;Técnicas de proteção de redes, análise de vulnerabilidades e ética em hacking.
-Bola;ovos.
-Desenvolvimento Web;Criação de sites, sistemas modernos e aplicações corporativas completas.
-Inteligência Artificial;Exploração de redes neurais, machine learning e automação inteligente.
-Robótica e Automação;Projetos de hardware, sensores, Arduino e automação de processos industriais.
-Cibersegurança;Técnicas de proteção de redes, análise de vulnerabilidades e ética em hacking.
-Bola;ovos.
+Desenvolvimento de Jogos;Criação de jogos digitais, mecânicas interativas e experiências imersivas.
+Ciência de Dados;Análise de dados, criação de gráficos e descoberta de padrões para decisões estratégicas.
+Cibersegurança;Proteção de sistemas, redes e informações contra ataques e ameaças digitais.
+Banco de Dados;Modelagem, organização e gerenciamento de grandes volumes de informações.
+Desenvolvimento Mobile;Criação de aplicativos para smartphones Android e iOS com recursos modernos.
+Engenharia de Software;Planejamento, desenvolvimento, testes e manutenção de sistemas de alta qualidade.
+Robótica;Programação de robôs, automação de tarefas e integração de sensores inteligentes.
+Computação em Nuvem;Desenvolvimento e gerenciamento de aplicações, servidores e serviços em ambientes cloud.
+Design de Interfaces (UI/UX);Criação de interfaces intuitivas, protótipos interativos e experiências digitais centradas no usuário.
+Internet das Coisas (IoT);Desenvolvimento de dispositivos conectado=s, sensores inteligentes e sistemas automatizados.
