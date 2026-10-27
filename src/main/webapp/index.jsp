@@ -111,7 +111,7 @@
 
 <!-- Rodapé da página -->
 <footer class="page-footer">
-    Sistema de Votação Oficial • Mundo SENAI
+    Turma de Técnico em Desenvolvimento de Sistemas 2026 - Felipe, Guilherme, Matheus, Pedro.
 </footer>
 
 <!-- Script interativo para gerenciar a seleção dos cartões -->
