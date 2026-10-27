@@ -9,7 +9,7 @@
 body {
     background-color: #f8fafc;
     color: #0f172a;
-    padding: 24px;
+    padding: 32px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -21,7 +21,7 @@ body {
 .main-content,
 .page-footer {
     width: 100%;
-    max-width: 896px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -37,7 +37,7 @@ body {
 
 .brand-title,
 .hero-title {
-    font-size: 1.25rem;
+    font-size: 1.75rem;
     font-weight: 800;
     color: #0f172a;
 }
@@ -50,7 +50,7 @@ body {
 .hero-description,
 .track-desc,
 .selection-info {
-    font-size: 0.75rem;
+    font-size: 1rem;
     color: #64748b;
 }
 
@@ -79,8 +79,8 @@ body {
 .results-link {
     display: inline-flex;
     align-items: center;
-    padding: 8px 16px;
-    font-size: 0.75rem;
+    padding: 12px 20px;
+    font-size: 0.95rem;
     font-weight: 600;
     text-decoration: none;
     box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
@@ -88,9 +88,9 @@ body {
 
 .btn-submit {
     width: 100%;
-    max-width: 448px;
-    padding: 14px 32px;
-    font-size: 1rem;
+    max-width: 560px;
+    padding: 18px 36px;
+    font-size: 1.2rem;
     text-transform: uppercase;
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
@@ -99,16 +99,16 @@ body {
 .main-content {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 32px;
     flex-grow: 1;
 }
 
 /* Caixas de avisos (Alerts) */
 .alert-box {
-    padding: 16px;
+    padding: 20px;
     border-radius: 12px;
     border: 1px solid;
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-weight: 500;
 }
 
@@ -135,8 +135,8 @@ body {
     border: 1px solid #e2e8f0;
     background-color: #ffffff;
     border-radius: 16px;
-    padding: 16px 32px;
-    max-width: 576px;
+    padding: 24px 40px;
+    max-width: 720px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
@@ -144,7 +144,7 @@ body {
 .tracks-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 20px;
 }
 
 @media (min-width: 640px) {
@@ -165,12 +165,12 @@ body {
     border: 2px solid #e2e8f0;
     background-color: #ffffff;
     border-radius: 16px;
-    padding: 16px;
+    padding: 20px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 160px;
+    height: 190px;
     transition: all 0.2s ease;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
@@ -192,8 +192,8 @@ body {
 }
 
 .track-badge {
-    padding: 2px 8px;
-    font-size: 0.75rem;
+    padding: 4px 10px;
+    font-size: 0.9rem;
     font-weight: 700;
     border-radius: 6px;
     background-color: #f1f5f9;
@@ -206,15 +206,15 @@ body {
 }
 
 .track-name {
-    font-size: 1rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: #0f172a;
 }
 
 /* Botão radio customizado */
 .radio-indicator {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     border: 2px solid #cbd5e1;
     display: flex;
@@ -229,8 +229,8 @@ body {
 }
 
 .radio-dot {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background-color: #ffffff;
     display: none;
@@ -246,8 +246,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 32px;
-    gap: 12px;
+    margin-top: 40px;
+    gap: 16px;
 }
 
 .selection-info {
@@ -259,7 +259,7 @@ body {
     color: #6366f1;
     background-color: #eef2ff;
     border: 1px solid #c7d2fe;
-    padding: 4px 10px;
+    padding: 6px 12px;
     border-radius: 8px;
     margin-left: 4px;
     font-weight: 700;
@@ -267,10 +267,30 @@ body {
 
 /* Rodapé */
 .page-footer {
-    margin-top: 32px;
+    margin-top: 40px;
     border-top: 1px solid #e2e8f0;
-    padding-top: 16px;
+    padding-top: 20px;
     text-align: center;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     color: #94a3b8;
+}
+
+@media (max-width: 639px) {
+    body {
+        padding: 20px;
+    }
+
+    .brand-title,
+    .hero-title {
+        font-size: 1.4rem;
+    }
+
+    .track-card {
+        height: auto;
+        min-height: 170px;
+    }
+
+    .action-area {
+        margin-top: 24px;
+    }
 }

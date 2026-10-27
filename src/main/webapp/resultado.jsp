@@ -25,34 +25,34 @@
     <!-- Importa o CSS do Tailwind via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 p-6 min-h-screen">
+<body class="bg-slate-50 text-slate-800 p-8 min-h-screen">
 
-<main class="max-w-4xl mx-auto space-y-8">
+<main class="max-w-5xl mx-auto space-y-10">
 
     <!-- Cabeçalho principal com total de votos e botão de navegação -->
     <div class="flex items-center justify-between border-b pb-4">
         <div>
-            <h1 class="text-2xl font-bold">Resultado da Votação</h1>
-            <p class="text-sm text-slate-500">Total de votos: <strong><%= totalVotos %></strong></p>
+            <h1 class="text-3xl font-bold">Resultado da Votação</h1>
+            <p class="text-base text-slate-500">Total de votos: <strong><%= totalVotos %></strong></p>
         </div>
-        <a href="index.jsp" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-indigo-700">← Voltar</a>
+        <a href="index.jsp" class="bg-indigo-600 text-white px-5 py-3 rounded-lg font-semibold text-base hover:bg-indigo-700">← Voltar</a>
     </div>
 
     <%-- Verifica se existem trilhas para exibir --%>
     <% if (trilhas != null && !trilhas.isEmpty()) { %>
 
     <!-- Pódio visual com os 3 primeiros colocados -->
-    <div class="flex items-end justify-center gap-4 py-6">
+    <div class="flex items-end justify-center gap-5 py-8">
 
         <!-- 2º Lugar -->
         <% if (p2 != null) { %>
         <div class="flex flex-col items-center w-1/3">
-            <span class="text-xs font-bold text-slate-400">2º LUGAR</span>
-            <h4 class="font-bold text-slate-800 text-center"><%= p2.getNome() %></h4>
-            <span class="text-xs font-bold text-indigo-600 bg-slate-100 px-2 py-0.5 rounded-full mb-2"><%= p2.getVotos() %> votos</span>
-            <div class="w-full h-48 bg-slate-100 border-2 border-slate-200 rounded-2xl flex flex-col justify-between p-3 text-center shadow-sm">
-                <span class="text-lg font-black text-slate-600">2º</span>
-                <span class="bg-white rounded-lg text-xs py-1 text-slate-500 font-medium">Vice-Líder</span>
+            <span class="text-sm font-bold text-slate-400">2º LUGAR</span>
+            <h4 class="text-lg font-bold text-slate-800 text-center"><%= p2.getNome() %></h4>
+            <span class="text-sm font-bold text-indigo-600 bg-slate-100 px-3 py-1 rounded-full mb-2"><%= p2.getVotos() %> votos</span>
+            <div class="w-full h-56 bg-slate-100 border-2 border-slate-200 rounded-2xl flex flex-col justify-between p-4 text-center shadow-sm">
+                <span class="text-xl font-black text-slate-600">2º</span>
+                <span class="bg-white rounded-lg text-sm py-2 text-slate-500 font-medium">Vice-Líder</span>
             </div>
         </div>
         <% } %>
@@ -61,11 +61,11 @@
         <% if (p1 != null) { %>
         <div class="flex flex-col items-center w-1/3">
             <span class="text-xl">👑</span>
-            <h4 class="font-bold text-slate-900 text-center"><%= p1.getNome() %></h4>
-            <span class="text-xs font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full mb-2"><%= p1.getVotos() %> votos</span>
-            <div class="w-full h-64 bg-amber-400 border-2 border-amber-500 rounded-2xl flex flex-col justify-between p-3 text-center shadow-md">
-                <span class="text-2xl font-black text-amber-900">1º</span>
-                <span class="bg-white/90 rounded-lg text-xs py-1 text-amber-900 font-bold uppercase">Top Votado</span>
+            <h4 class="text-lg font-bold text-slate-900 text-center"><%= p1.getNome() %></h4>
+            <span class="text-sm font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full mb-2"><%= p1.getVotos() %> votos</span>
+            <div class="w-full h-72 bg-amber-400 border-2 border-amber-500 rounded-2xl flex flex-col justify-between p-4 text-center shadow-md">
+                <span class="text-3xl font-black text-amber-900">1º</span>
+                <span class="bg-white/90 rounded-lg text-sm py-2 text-amber-900 font-bold uppercase">Top Votado</span>
             </div>
         </div>
         <% } %>
@@ -73,20 +73,20 @@
         <!-- 3º Lugar -->
         <% if (p3 != null) { %>
         <div class="flex flex-col items-center w-1/3">
-            <span class="text-xs font-bold text-orange-400">3º LUGAR</span>
-            <h4 class="font-bold text-slate-800 text-center"><%= p3.getNome() %></h4>
-            <span class="text-xs font-bold text-orange-600 bg-orange-100 px-2 py-0.5 rounded-full mb-2"><%= p3.getVotos() %> votos</span>
-            <div class="w-full h-36 bg-orange-100 border-2 border-orange-200 rounded-2xl flex flex-col justify-between p-3 text-center shadow-sm">
-                <span class="text-lg font-black text-orange-700">3º</span>
-                <span class="bg-white rounded-lg text-xs py-1 text-orange-800 font-medium">3º Colocado</span>
+            <span class="text-sm font-bold text-orange-400">3º LUGAR</span>
+            <h4 class="text-lg font-bold text-slate-800 text-center"><%= p3.getNome() %></h4>
+            <span class="text-sm font-bold text-orange-600 bg-orange-100 px-3 py-1 rounded-full mb-2"><%= p3.getVotos() %> votos</span>
+            <div class="w-full h-44 bg-orange-100 border-2 border-orange-200 rounded-2xl flex flex-col justify-between p-4 text-center shadow-sm">
+                <span class="text-xl font-black text-orange-700">3º</span>
+                <span class="bg-white rounded-lg text-sm py-2 text-orange-800 font-medium">3º Colocado</span>
             </div>
         </div>
         <% } %>
     </div>
 
     <!-- Lista completa de classificação geral -->
-    <div class="bg-white rounded-2xl border p-6 space-y-4 shadow-sm">
-        <h3 class="font-bold text-lg text-slate-900 border-b pb-3">Classificação Geral</h3>
+    <div class="bg-white rounded-2xl border p-8 space-y-5 shadow-sm">
+        <h3 class="font-bold text-xl text-slate-900 border-b pb-4">Classificação Geral</h3>
 
         <%-- Percorre a lista para renderizar cada trilha e calcular suas porcentagens --%>
         <% for (int i = 0; i < trilhas.size(); i++) {
@@ -98,23 +98,23 @@
             // Formata o valor numérico para 1 casa decimal usando ponto
             String pctStr = String.format("%.1f", pct).replace(",", ".");
         %>
-        <div class="flex flex-col sm:flex-row items-center gap-4 p-3 hover:bg-slate-50 rounded-xl border-b last:border-0">
+        <div class="flex flex-col sm:flex-row items-center gap-5 p-4 hover:bg-slate-50 rounded-xl border-b last:border-0">
             <!-- Posição ordinal (#1, #2, etc) -->
-            <span class="font-bold text-sm bg-slate-100 text-slate-700 w-8 h-8 flex items-center justify-center rounded-lg shrink-0">#<%= i + 1 %></span>
+            <span class="font-bold text-base bg-slate-100 text-slate-700 w-10 h-10 flex items-center justify-center rounded-lg shrink-0">#<%= i + 1 %></span>
 
             <!-- Nome, descrição e barra de progresso gráfica -->
             <div class="flex-1 w-full">
-                <h4 class="font-bold text-slate-900"><%= t.getNome() %></h4>
-                <p class="text-xs text-slate-500"><%= t.getDescricao() %></p>
-                <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
+                <h4 class="text-lg font-bold text-slate-900"><%= t.getNome() %></h4>
+                <p class="text-sm text-slate-500"><%= t.getDescricao() %></p>
+                <div class="w-full bg-slate-100 h-3 rounded-full mt-3 overflow-hidden">
                     <div class="bg-indigo-600 h-full rounded-full" style="width: <%= pctStr %>%;"></div>
                 </div>
             </div>
 
             <!-- Valores finais de porcentagem e total de votos -->
             <div class="text-right shrink-0">
-                <span class="block text-lg font-extrabold text-indigo-600"><%= pctStr %>%</span>
-                <span class="text-xs text-slate-400"><%= t.getVotos() %> votos</span>
+                <span class="block text-xl font-extrabold text-indigo-600"><%= pctStr %>%</span>
+                <span class="text-sm text-slate-400"><%= t.getVotos() %> votos</span>
             </div>
         </div>
         <% } %>
