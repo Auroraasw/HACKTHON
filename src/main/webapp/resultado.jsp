@@ -1,15 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.repository.TrilhaRepository, com.service.TrilhaService, com.model.Trilha, java.util.List" %>
 <%
+    // Define codificação UTF-8 para evitar erros de acentuação
     request.setCharacterEncoding("UTF-8");
-    String caminho = application.getRealPath("/recursos/trilhas.txt");
-    List<Trilha> trilhas = new TrilhaService(new TrilhaRepository(caminho)).TrilhaOrd();
 
+    // Carrega o arquivo trilhas.txt e obtém a lista ordenada de trilhas
+    List<Trilha> trilhas = new TrilhaService(new TrilhaRepository(application.getRealPath("/recursos/trilhas.txt"))).TrilhaOrd();
+
+    // Soma o total de votos acumulados de todas as trilhas
     int totalVotos = 0;
-    if (trilhas != null) {
-        for (Trilha t : trilhas) totalVotos += t.getVotos();
-    }
+    if (trilhas != null) for (Trilha t : trilhas) totalVotos += t.getVotos();
 
+    // Separa individualmente os 3 primeiros colocados do pódio
     Trilha p1 = (trilhas != null && trilhas.size() > 0) ? trilhas.get(0) : null;
     Trilha p2 = (trilhas != null && trilhas.size() > 1) ? trilhas.get(1) : null;
     Trilha p3 = (trilhas != null && trilhas.size() > 2) ? trilhas.get(2) : null;
@@ -20,28 +22,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados | Mundo SENAI</title>
+    <!-- Importa o CSS do Tailwind via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 p-6 min-h-screen">
 
 <main class="max-w-4xl mx-auto space-y-8">
 
-    <%-- Cabeçalho --%>
+    <!-- Cabeçalho principal com total de votos e botão de navegação -->
     <div class="flex items-center justify-between border-b pb-4">
         <div>
             <h1 class="text-2xl font-bold">Resultado da Votação</h1>
             <p class="text-sm text-slate-500">Total de votos: <strong><%= totalVotos %></strong></p>
         </div>
-        <a href="index.jsp" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-indigo-700">
-            ← Voltar
-        </a>
+        <a href="index.jsp" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-indigo-700">← Voltar</a>
     </div>
 
+    <%-- Verifica se existem trilhas para exibir --%>
     <% if (trilhas != null && !trilhas.isEmpty()) { %>
 
-    <%-- Pódio Top 3 --%>
+    <!-- Pódio visual com os 3 primeiros colocados -->
     <div class="flex items-end justify-center gap-4 py-6">
-        <%-- 2º Lugar --%>
+
+        <!-- 2º Lugar -->
         <% if (p2 != null) { %>
         <div class="flex flex-col items-center w-1/3">
             <span class="text-xs font-bold text-slate-400">2º LUGAR</span>
@@ -54,7 +57,7 @@
         </div>
         <% } %>
 
-        <%-- 1º Lugar --%>
+        <!-- 1º Lugar (Destaque principal) -->
         <% if (p1 != null) { %>
         <div class="flex flex-col items-center w-1/3">
             <span class="text-xl">👑</span>
@@ -67,7 +70,7 @@
         </div>
         <% } %>
 
-        <%-- 3º Lugar --%>
+        <!-- 3º Lugar -->
         <% if (p3 != null) { %>
         <div class="flex flex-col items-center w-1/3">
             <span class="text-xs font-bold text-orange-400">3º LUGAR</span>
@@ -81,17 +84,25 @@
         <% } %>
     </div>
 
-    <%-- Classificação Geral --%>
+    <!-- Lista completa de classificação geral -->
     <div class="bg-white rounded-2xl border p-6 space-y-4 shadow-sm">
         <h3 class="font-bold text-lg text-slate-900 border-b pb-3">Classificação Geral</h3>
+
+        <%-- Percorre a lista para renderizar cada trilha e calcular suas porcentagens --%>
         <% for (int i = 0; i < trilhas.size(); i++) {
             Trilha t = trilhas.get(i);
+
+            // Calcula a porcentagem de votos individuais em relação ao total
             double pct = totalVotos > 0 ? ((double) t.getVotos() / totalVotos) * 100 : 0;
+
+            // Formata o valor numérico para 1 casa decimal usando ponto
             String pctStr = String.format("%.1f", pct).replace(",", ".");
         %>
         <div class="flex flex-col sm:flex-row items-center gap-4 p-3 hover:bg-slate-50 rounded-xl border-b last:border-0">
+            <!-- Posição ordinal (#1, #2, etc) -->
             <span class="font-bold text-sm bg-slate-100 text-slate-700 w-8 h-8 flex items-center justify-center rounded-lg shrink-0">#<%= i + 1 %></span>
 
+            <!-- Nome, descrição e barra de progresso gráfica -->
             <div class="flex-1 w-full">
                 <h4 class="font-bold text-slate-900"><%= t.getNome() %></h4>
                 <p class="text-xs text-slate-500"><%= t.getDescricao() %></p>
@@ -100,6 +111,7 @@
                 </div>
             </div>
 
+            <!-- Valores finais de porcentagem e total de votos -->
             <div class="text-right shrink-0">
                 <span class="block text-lg font-extrabold text-indigo-600"><%= pctStr %>%</span>
                 <span class="text-xs text-slate-400"><%= t.getVotos() %> votos</span>
@@ -108,6 +120,7 @@
         <% } %>
     </div>
 
+    <%-- Mensagem de erro caso a lista esteja vazia ou nula --%>
     <% } else { %>
     <div class="p-4 bg-red-50 text-red-600 rounded-xl border border-red-200 text-center">
         Nenhuma trilha foi encontrada no arquivo trilhas.txt.
