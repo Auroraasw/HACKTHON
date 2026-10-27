@@ -1,4 +1,4 @@
-/* Reset global de estilos */
+/* Reset global e corpo da página */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,7 +6,6 @@
     font-family: system-ui, -apple-system, sans-serif;
 }
 
-/* Corpo e fundo da página */
 body {
     background-color: #f8fafc;
     color: #0f172a;
@@ -17,11 +16,18 @@ body {
     justify-content: space-between;
 }
 
-/* Cabeçalho topo (Título e link Ver Resultados) */
-.header-container {
+/* Agrupamento de contêineres com largura padrão */
+.header-container,
+.main-content,
+.page-footer {
     width: 100%;
     max-width: 896px;
-    margin: 0 auto 24px auto;
+    margin: 0 auto;
+}
+
+/* Cabeçalho */
+.header-container {
+    margin-bottom: 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -29,54 +35,79 @@ body {
     padding-bottom: 16px;
 }
 
-.brand-title {
+.brand-title,
+.hero-title {
     font-size: 1.25rem;
     font-weight: 800;
     color: #0f172a;
 }
 
-.brand-subtitle {
+.hero-title {
+    text-transform: uppercase;
+}
+
+.brand-subtitle,
+.hero-description,
+.track-desc,
+.selection-info {
     font-size: 0.75rem;
     color: #64748b;
-    font-weight: 500;
+}
+
+.hero-description,
+.track-desc {
+    margin-top: 4px;
+}
+
+/* Botões e Links com estilos compartilhados */
+.results-link,
+.btn-submit {
+    background-color: #6366f1;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.results-link:hover,
+.btn-submit:hover {
+    background-color: #4f46e5;
 }
 
 .results-link {
     display: inline-flex;
     align-items: center;
     padding: 8px 16px;
-    border-radius: 12px;
     font-size: 0.75rem;
     font-weight: 600;
-    color: #ffffff;
-    background-color: #6366f1;
-    border: none;
     text-decoration: none;
     box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
-    transition: background-color 0.2s ease;
 }
 
-.results-link:hover {
-    background-color: #4f46e5;
-}
-
-/* Conteúdo central da página */
-.main-content {
-    max-width: 896px;
+.btn-submit {
     width: 100%;
-    margin: 0 auto;
+    max-width: 448px;
+    padding: 14px 32px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Conteúdo central */
+.main-content {
     display: flex;
     flex-direction: column;
     gap: 24px;
     flex-grow: 1;
 }
 
-/* Caixas de mensagens e avisos */
+/* Caixas de avisos (Alerts) */
 .alert-box {
     padding: 16px;
     border-radius: 12px;
-    border-width: 1px;
-    border-style: solid;
+    border: 1px solid;
     font-size: 0.875rem;
     font-weight: 500;
 }
@@ -94,7 +125,7 @@ body {
     text-align: center;
 }
 
-/* Caixa de instrução (Hero) */
+/* Hero Section */
 .hero-section {
     text-align: center;
 }
@@ -106,39 +137,25 @@ body {
     border-radius: 16px;
     padding: 16px 32px;
     max-width: 576px;
-    margin: 0 auto;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.hero-title {
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: #0f172a;
-    text-transform: uppercase;
-}
-
-.hero-description {
-    color: #64748b;
-    font-size: 0.75rem;
-    margin-top: 4px;
-}
-
-/* Grid responsivo de cartões */
+/* Grid responsivo */
 .tracks-grid {
     display: grid;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 16px;
 }
 
 @media (min-width: 640px) {
     .tracks-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (min-width: 1024px) {
     .tracks-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
@@ -162,7 +179,6 @@ body {
     border-color: #cbd5e1;
 }
 
-/* Estilo do cartão quando selecionado */
 .track-card.active {
     border-color: #f59e0b;
     background-color: #fef3c7;
@@ -189,11 +205,17 @@ body {
     color: #78350f;
 }
 
+.track-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
 /* Botão radio customizado */
 .radio-indicator {
     width: 20px;
     height: 20px;
-    border-radius: 9999px;
+    border-radius: 50%;
     border: 2px solid #cbd5e1;
     display: flex;
     align-items: center;
@@ -209,7 +231,7 @@ body {
 .radio-dot {
     width: 8px;
     height: 8px;
-    border-radius: 9999px;
+    border-radius: 50%;
     background-color: #ffffff;
     display: none;
 }
@@ -218,20 +240,7 @@ body {
     display: block;
 }
 
-/* Nome e descrição da trilha */
-.track-name {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #0f172a;
-}
-
-.track-desc {
-    font-size: 0.75rem;
-    color: #64748b;
-    margin-top: 4px;
-}
-
-/* Área de confirmação e botão Votar */
+/* Área de ação */
 .action-area {
     display: flex;
     flex-direction: column;
@@ -242,7 +251,6 @@ body {
 }
 
 .selection-info {
-    font-size: 0.75rem;
     font-weight: 600;
     color: #475569;
 }
@@ -257,31 +265,9 @@ body {
     font-weight: 700;
 }
 
-.btn-submit {
-    width: 100%;
-    max-width: 448px;
-    padding: 14px 32px;
-    background-color: #6366f1;
-    color: #ffffff;
-    font-weight: 800;
-    font-size: 1rem;
-    text-transform: uppercase;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-    transition: background-color 0.2s ease;
-}
-
-.btn-submit:hover {
-    background-color: #4f46e5;
-}
-
-/* Rodapé da página */
+/* Rodapé */
 .page-footer {
-    max-width: 896px;
-    width: 100%;
-    margin: 32px auto 0 auto;
+    margin-top: 32px;
     border-top: 1px solid #e2e8f0;
     padding-top: 16px;
     text-align: center;

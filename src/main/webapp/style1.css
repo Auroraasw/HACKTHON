@@ -1,4 +1,4 @@
-/* Reset de estilos globais */
+/* Reset global e corpo da página */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,7 +6,6 @@
     font-family: system-ui, -apple-system, sans-serif;
 }
 
-/* Estilo do corpo da página */
 body {
     background-color: #f8fafc;
     color: #1e293b;
@@ -14,38 +13,64 @@ body {
     min-height: 100vh;
 }
 
-/* Container principal */
+/* Container e layout */
 .container {
     max-width: 800px;
     margin: 0 auto;
 }
 
-/* Cabeçalho e botão voltar */
-.header {
+.header,
+.trilha-item {
     display: flex;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.header {
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #e2e8f0;
     padding-bottom: 16px;
     margin-bottom: 24px;
 }
 
-.header h1 {
-    font-size: 1.5rem;
+.trilha-item {
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-color: #f1f5f9;
+}
+
+.trilha-item:last-child {
+    border-bottom: none;
+}
+
+/* Tipografia */
+.header h1,
+.info h3 {
     color: #0f172a;
 }
 
-.header p {
+.header h1 { font-size: 1.5rem; }
+.info h3 { font-size: 1rem; }
+
+.header p,
+.info p {
     font-size: 0.875rem;
     color: #64748b;
-    margin-top: 4px;
+}
+
+.header p { margin-top: 4px; }
+.info p { font-size: 0.75rem; margin-bottom: 8px; }
+
+/* Botão voltar e caixa de alerta */
+.btn-voltar,
+.alerta-erro {
+    border-radius: 8px;
+    padding: 8px 16px;
 }
 
 .btn-voltar {
     background-color: #4f46e5;
     color: #ffffff;
-    padding: 8px 16px;
-    border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.875rem;
@@ -55,7 +80,16 @@ body {
     background-color: #4338ca;
 }
 
-/* Cartão principal e lista de itens */
+.alerta-erro {
+    background-color: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+}
+
+/* Cartão de resultados e barra de progresso */
 .card-resultados {
     background-color: #ffffff;
     border: 1px solid #e2e8f0;
@@ -63,19 +97,6 @@ body {
     padding: 16px 24px;
 }
 
-.trilha-item {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 0;
-    border-bottom: 1px solid #f1f5f9;
-}
-
-.trilha-item:last-child {
-    border-bottom: none;
-}
-
-/* Badge de posição (#1, #2) */
 .posicao {
     background-color: #f1f5f9;
     color: #334155;
@@ -89,37 +110,27 @@ body {
     border-radius: 8px;
 }
 
-/* Informações da trilha e barra de progresso */
 .info {
     flex: 1;
 }
 
-.info h3 {
-    font-size: 1rem;
-    color: #0f172a;
-}
-
-.info p {
-    font-size: 0.75rem;
-    color: #64748b;
-    margin-bottom: 8px;
+.barra-fundo,
+.barra-progresso {
+    border-radius: 50px;
+    height: 8px;
 }
 
 .barra-fundo {
     width: 100%;
     background-color: #f1f5f9;
-    height: 8px;
-    border-radius: 999px;
     overflow: hidden;
 }
 
 .barra-progresso {
     background-color: #4f46e5;
-    height: 100%;
-    border-radius: 999px;
 }
 
-/* Caixa de porcentagem e total de votos */
+/* Votos e porcentagens */
 .votos-box {
     text-align: right;
     min-width: 80px;
@@ -135,14 +146,4 @@ body {
 .total-votos {
     font-size: 0.75rem;
     color: #94a3b8;
-}
-
-/* Caixa de alerta de erro */
-.alerta-erro {
-    background-color: #fef2f2;
-    color: #dc2626;
-    padding: 16px;
-    border-radius: 12px;
-    border: 1px solid #fecaca;
-    text-align: center;
 }

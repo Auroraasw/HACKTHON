@@ -1,39 +1,26 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.repository.TrilhaRepository" %>
-<%@ page import="com.service.TrilhaService" %>
-<%@ page import="com.model.Trilha" %>
-<%@ page import="java.util.List" %>
+<%@ page import="com.repository.TrilhaRepository, com.service.TrilhaService, com.model.Trilha, java.util.List" %>
 <%
-    /*
-     * Configura codificação, lê o arquivo de trilhas e inicializa o serviço.
-     */
     request.setCharacterEncoding("UTF-8");
-    String path = application.getRealPath("/recursos/trilhas.txt");
-    TrilhaRepository repository = new TrilhaRepository(path);
-    TrilhaService service = new TrilhaService(repository);
+    TrilhaService service = new TrilhaService(new TrilhaRepository(application.getRealPath("/recursos/trilhas.txt")));
 
-    String message = null;
-    String messageType = "success";
+    String msg = null, msgType = "success";
 
-    // Processa a submissão do formulário quando o usuário envia um voto (método POST)
     if ("POST".equalsIgnoreCase(request.getMethod())) {
-        String voteStr = request.getParameter("voto");
         try {
-            int index = Integer.parseInt(voteStr == null ? "" : voteStr);
-            if (service.RegVoto(index)) {
-                message = "Voto computado com sucesso! Obrigado por participar.";
-                messageType = "success";
+            int idx = Integer.parseInt(request.getParameter("voto"));
+            if (service.RegVoto(idx)) {
+                msg = "Voto computado com sucesso! Obrigado por participar.";
             } else {
-                message = "A opção selecionada não existe. Escolha uma das trilhas disponíveis.";
-                messageType = "error";
+                msg = "A opção selecionada não existe.";
+                msgType = "error";
             }
-        } catch (NumberFormatException e) {
-            message = "Não foi possível validar seu voto. Selecione uma trilha válida.";
-            messageType = "error";
+        } catch (Exception e) {
+            msg = "Selecione uma trilha válida.";
+            msgType = "error";
         }
     }
 
-    // Carrega a lista atualizada de trilhas para renderizar na tela
     List<Trilha> tracks = service.getTrilhas();
 %>
 <!DOCTYPE html>
@@ -56,11 +43,8 @@
 
 <main class="main-content">
 
-    <%-- Exibe a caixa de alerta de sucesso ou erro, caso haja alguma mensagem setada no Java --%>
-    <% if (message != null) { %>
-    <div class="alert-box <%= "error".equals(messageType) ? "alert-error" : "alert-success" %>">
-        <%= message %>
-    </div>
+    <% if (msg != null) { %>
+    <div class="alert-box alert-<%= msgType %>"><%= msg %></div>
     <% } %>
 
     <section class="hero-section">
@@ -70,31 +54,22 @@
         </div>
     </section>
 
-    <%-- Monta o formulário dinâmico caso existam trilhas cadastradas --%>
     <% if (tracks != null && !tracks.isEmpty()) { %>
     <form id="vote-form" method="post" action="index.jsp">
-        <%-- Campo oculto que armazena o índice da trilha selecionada pelo JavaScript --%>
         <input type="hidden" name="voto" id="selected-vote-input" value="0">
 
         <div class="tracks-grid">
-            <%-- Percorre a lista de trilhas criando um card interativo para cada uma --%>
             <% for (int i = 0; i < tracks.size(); i++) {
-                Trilha track = tracks.get(i);
-                boolean isSelected = (i == 0);
+                Trilha t = tracks.get(i);
             %>
-            <div class="track-card <%= isSelected ? "active" : "" %>" data-index="<%= i %>"
-                 data-name="<%= track.getNome() %>">
+            <div class="track-card <%= (i == 0) ? "active" : "" %>" data-index="<%= i %>" data-name="<%= t.getNome() %>">
                 <div class="card-top">
                     <span class="track-badge">#<%= String.format("%02d", i + 1) %></span>
-                    <div class="radio-indicator">
-                        <span class="radio-dot"></span>
-                    </div>
+                    <div class="radio-indicator"><span class="radio-dot"></span></div>
                 </div>
                 <div>
-                    <h3 class="track-name"><%= track.getNome() %>
-                    </h3>
-                    <p class="track-desc"><%= track.getDescricao() %>
-                    </p>
+                    <h3 class="track-name"><%= t.getNome() %></h3>
+                    <p class="track-desc"><%= t.getDescricao() %></p>
                 </div>
             </div>
             <% } %>
@@ -103,18 +78,13 @@
         <div class="action-area">
             <div class="selection-info">
                 Opção selecionada:
-                <span id="selected-label" class="selection-label">
-                        <%= tracks.get(0).getNome() %>
-                    </span>
+                <span id="selected-label" class="selection-label"><%= tracks.get(0).getNome() %></span>
             </div>
             <button type="submit" class="btn-submit">Confirmar Voto</button>
         </div>
     </form>
     <% } else { %>
-    <%-- Exibido caso o arquivo trilhas.txt esteja vazio ou não seja encontrado --%>
-    <div class="alert-box alert-error">
-        Nenhuma trilha foi cadastrada no arquivo trilhas.txt.
-    </div>
+    <div class="alert-box alert-error">Nenhuma trilha foi cadastrada no arquivo trilhas.txt.</div>
     <% } %>
 
 </main>
@@ -124,28 +94,13 @@
 </footer>
 
 <script>
-    /*
+    document.querySelectorAll('.track-card').forEach(card => {
+        card.addEventListener('click', () => {
+            document.querySelectorAll('.track-card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
 
-     * Captura o clique nos cards, atualiza o destaque visual e define a trilha selecionada no input hidden.
-     */
-    document.addEventListener('DOMContentLoaded', () => {
-        const cards = document.querySelectorAll('.track-card');
-        const voteInput = document.getElementById('selected-vote-input');
-        const selectedLabel = document.getElementById('selected-label');
-
-        cards.forEach(card => {
-            card.addEventListener('click', () => {
-                // Remove a seleção de todos os cards e aplica apenas no clicado
-                cards.forEach(c => c.classList.remove('active'));
-                card.classList.add('active');
-
-                // Atualiza o valor do input oculto e o texto na tela
-                const index = card.dataset.index;
-                const name = card.dataset.name;
-
-                voteInput.value = index;
-                selectedLabel.textContent = name;
-            });
+            document.getElementById('selected-vote-input').value = card.dataset.index;
+            document.getElementById('selected-label').textContent = card.dataset.name;
         });
     });
 </script>
