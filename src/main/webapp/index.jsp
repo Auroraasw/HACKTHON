@@ -23,7 +23,7 @@
                 msgType = "error";
             }
         } catch (Exception e) {
-            msg = "Selecione uma trilha válida.";
+            msg = "Selecione um curso válido.";
             msgType = "error";
         }
     }
@@ -36,7 +36,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Votação Oficial | Mundo SENAI</title>
+    <title>Votação</title>
     <!-- Carrega a folha de estilos CSS externa -->
     <link rel="stylesheet" href="<%= request.getContextPath() %>/style2.css">
 </head>
@@ -45,8 +45,8 @@
 <!-- Cabeçalho com o título do sistema e link para a página de resultados -->
 <header class="header-container">
     <div>
-        <h1 class="brand-title">Mundo SENAI</h1>
-        <p class="brand-subtitle">Escolha a sua trilha tecnológica favorita</p>
+        <h1 class="brand-title">Votação Oficial</h1>
+        <p class="brand-subtitle">Escolha a seu curso favorito</p>
     </div>
     <a href="resultado.jsp" class="results-link">Ver Resultados</a>
 </header>
@@ -62,7 +62,7 @@
     <section class="hero-section">
         <div class="hero-card">
             <h2 class="hero-title">Vote na sua opção favorita</h2>
-            <p class="hero-description">Selecione uma trilha abaixo e clique no botão para confirmar seu voto.</p>
+            <p class="hero-description">Selecione um curso abaixo e clique no botão para confirmar seu voto.</p>
         </div>
     </section>
 
@@ -104,7 +104,7 @@
 
     <!-- Alerta exibido caso não haja trilhas no arquivo -->
     <% } else { %>
-    <div class="alert-box alert-error">Nenhuma trilha foi cadastrada no arquivo trilhas.txt.</div>
+    <div class="alert-box alert-error">Nenhum curso foi cadastrado no arquivo cursos.txt.</div>
     <% } %>
 
 </main>
