@@ -1,0 +1,1 @@
+É UM SITE DE VOTAÇÃO👍👍
